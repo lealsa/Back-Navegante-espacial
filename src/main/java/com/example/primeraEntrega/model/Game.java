@@ -27,7 +27,8 @@ public class Game {
 
     @Column(name = "cuota", nullable = false)
     private Double cuota;
-
+    @Column(name = "creditos", nullable = false)
+    private Double creditos;
     @OneToOne
     @JsonIgnore
     private Nave nave;
@@ -53,7 +54,13 @@ public class Game {
     public void setId(Long id) {
         this.id = id;
     }
+    public Double getCreditos() {
+        return creditos;
+    }
 
+    public void setCreditos(Double id) {
+        this.creditos= id;
+    }
     public Double getTime() {
         return time;
     }

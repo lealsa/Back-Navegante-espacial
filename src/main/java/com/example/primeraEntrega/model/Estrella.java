@@ -53,6 +53,16 @@ public class Estrella {
     {
         return this.nombreEstrella;
     }
+    public void setNombreEstrella(String n){
+        this.nombreEstrella = n;
+    }
+    public String getImagen()
+    {
+        return this.imagen;
+    }
+    public void setImagen(String n){
+        this.imagen = n;
+    }
     public Long getId() {
         return id;
     }

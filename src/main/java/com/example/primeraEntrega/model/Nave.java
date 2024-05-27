@@ -3,13 +3,7 @@ package com.example.primeraEntrega.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "nave")
@@ -36,12 +30,17 @@ public class Nave {
     @OneToMany(mappedBy = "nave")
     private List<InventarioNave> inventario = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "current_star_id")
+    private Estrella currentStar; // Relación con la entidad Estrella
+
     // Constructor completo
-    public Nave(String foto, String nombre, Double capacidadMax, Double velocidad) {
+    public Nave(String foto, String nombre, Double capacidadMax, Double velocidad, Estrella currentStar) {
         this.foto = foto;
         this.nombre = nombre;
         this.capacidadMax = capacidadMax;
         this.velocidad = velocidad;
+        this.currentStar = currentStar;
         this.tripulacion = new ArrayList<>();
         this.inventario = new ArrayList<>();
     }
@@ -113,5 +112,13 @@ public class Nave {
 
     public void addInventario(InventarioNave iNave) {
         this.inventario.add(iNave);
+    }
+
+    public Estrella getCurrentStar() {
+        return currentStar;
+    }
+
+    public void setCurrentStar(Estrella currentStar) {
+        this.currentStar = currentStar;
     }
 }

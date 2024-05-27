@@ -1,6 +1,8 @@
 package com.example.primeraEntrega.model;
 
 import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Tripulacion {
@@ -9,9 +11,8 @@ public class Tripulacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "jugador_id", nullable = false)
-    private Jugador jugador;
+    @OneToMany(mappedBy = "tripulacion")
+    private Set<Jugador> jugadores = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "nave_id", nullable = false)
@@ -21,8 +22,7 @@ public class Tripulacion {
     private String rol;
 
     // Constructor completo
-    public Tripulacion(Jugador jugador, Nave nave, String rol) {
-        this.jugador = jugador;
+    public Tripulacion(Nave nave, String rol) {
         this.nave = nave;
         this.rol = rol;
     }
@@ -40,12 +40,12 @@ public class Tripulacion {
         this.id = id;
     }
 
-    public Jugador getJugador() {
-        return jugador;
+    public Set<Jugador> getJugadores() {
+        return jugadores;
     }
 
-    public void setJugador(Jugador jugador) {
-        this.jugador = jugador;
+    public void setJugadores(Set<Jugador> jugadores) {
+        this.jugadores = jugadores;
     }
 
     public Nave getNave() {
