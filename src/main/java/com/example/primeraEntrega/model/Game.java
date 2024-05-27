@@ -25,19 +25,27 @@ public class Game {
     @Column(name = "timeMax", nullable = false)
     private Double timeMax;
 
+    @Column(name = "cuota", nullable = false)
+    private Double cuota;
+
     @OneToOne
     @JsonIgnore
     private Nave nave;
 
-    public Game(Double time, Double score, Double timeMax) {
+    // Constructor completo
+    public Game(Double time, Double score, Double timeMax, Double cuota, Nave nave) {
         this.time = time;
         this.score = score;
         this.timeMax = timeMax;
+        this.cuota = cuota;
+        this.nave = nave;
     }
 
+    // Constructor vacío
     public Game() {
     }
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -46,28 +54,36 @@ public class Game {
         this.id = id;
     }
 
-    public Double gettime() {
+    public Double getTime() {
         return time;
     }
 
-    public void settime(Double time) {
+    public void setTime(Double time) {
         this.time = time;
     }
 
-    public Double getscore() {
+    public Double getScore() {
         return score;
     }
 
-    public void setscore(Double score) {
+    public void setScore(Double score) {
         this.score = score;
     }
 
-    public Double gettimeMax() {
+    public Double getTimeMax() {
         return timeMax;
     }
 
-    public void settimeMax(Double timeMax) {
+    public void setTimeMax(Double timeMax) {
         this.timeMax = timeMax;
+    }
+
+    public Double getCuota() {
+        return cuota;
+    }
+
+    public void setCuota(Double cuota) {
+        this.cuota = cuota;
     }
 
     public Nave getNave() {
@@ -77,10 +93,4 @@ public class Game {
     public void setNave(Nave nave) {
         this.nave = nave;
     }
-
-    public void setPuntaje(double d) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setPuntaje'");
-    }
-
 }

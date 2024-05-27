@@ -20,17 +20,17 @@ public class Producto {
     @Column(name = "volumen", nullable = false)
     private Double volumen;
 
-    @Column(name = "precio", nullable = false)
-    private Double precio;
+    @Column(name = "imagen", nullable = false)
+    private String imagen;
 
-    @Column(name = "tipo", nullable = false)
-    private String tipo;
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
 
     @OneToMany(mappedBy = "producto")
     private List<InventarioNave> naves = new ArrayList<>();
 
     @OneToMany(mappedBy = "producto")
-    private List<InventarioPlaneta> planeta = new ArrayList<>();
+    private List<StockPlaneta> planeta = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -48,14 +48,21 @@ public class Producto {
         this.volumen = volumen;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String imagen) {
+        this.nombre = imagen;
+    }
     public List<InventarioNave> getNaves() {
         return naves;
     }
@@ -64,30 +71,23 @@ public class Producto {
         this.naves = naves;
     }
 
-    public List<InventarioPlaneta> getPlaneta() {
+    public List<StockPlaneta> getPlaneta() {
         return planeta;
     }
 
-    public void setPlaneta(List<InventarioPlaneta> planeta) {
+    public void setPlaneta(List<StockPlaneta> planeta) {
         this.planeta = planeta;
     }
 
-    public Producto(Double volumen, String tipo) {
+    public Producto(Double volumen, String imagen, String nombre) {
         this.volumen = volumen;
-        this.tipo = tipo;
-        this.precio = 0.0;
+        this.imagen = imagen;
+        this.nombre = nombre;
     }
 
     public Producto() {
 
     }
 
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
 
 }

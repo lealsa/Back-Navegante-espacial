@@ -37,6 +37,8 @@ public class InventarioNaveService {
     public void eliminarInventario(Long id) {
         inventarioNaveRepositorio.deleteById(id);
     }
+
+
     public List<InformacionVentaProductoDTO> listarInformacionVentaProducto(String nombre) {
         List<InformacionVentaProductoDTO> listaProductosDTO = new ArrayList<>();
 
@@ -62,7 +64,6 @@ public class InventarioNaveService {
         for (InventarioNave p : productos) {
             vol += p.getProducto().getVolumen();
         }
-
         return vol;
     }
 }

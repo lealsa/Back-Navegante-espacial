@@ -6,14 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.example.primeraEntrega.model.InventarioPlaneta;
+import com.example.primeraEntrega.model.StockPlaneta;
 
-public interface InventarioPlanetaRepository extends JpaRepository<InventarioPlaneta, Long> {
+public interface InventarioPlanetaRepository extends JpaRepository<StockPlaneta, Long> {
 
     @Query("SELECT Producto FROM InventarioPlaneta as ip JOIN Planeta as p WHERE (ip.id = p.id) and p.id = :id")
-    List<InventarioPlaneta> buscarProductos(@Param("id") Long id);
+    List<StockPlaneta> buscarProductos(@Param("id") Long id);
 
     @Query("SELECT ip FROM InventarioPlaneta ip WHERE ip.planeta.id = :id")
-    List<InventarioPlaneta> buscarProductosPorPlaneta(@Param("id") Long id);
+    List<StockPlaneta> buscarProductosPorPlaneta(@Param("id") Long id);
 
 }

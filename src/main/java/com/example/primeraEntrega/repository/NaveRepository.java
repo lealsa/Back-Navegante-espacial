@@ -12,7 +12,7 @@ import com.example.primeraEntrega.model.Jugador;
 import com.example.primeraEntrega.model.Nave;
 
 @Repository
-public interface NaveRepository extends JpaRepository<Nave, String> {
+public interface NaveRepository extends JpaRepository<Nave, Long> {
 
     @Query("SELECT DISTINCT p FROM Nave e JOIN e.jugadores p WHERE SIZE(e.jugadores) > 0")
     List<Jugador> findEquipo();

@@ -5,8 +5,9 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -14,76 +15,56 @@ import jakarta.persistence.Table;
 @Table(name = "nave")
 public class Nave {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String foto;
+
+    @Column(nullable = false)
     private String nombre;
-
-    @Column(name = "dinero", nullable = false)
-    private Double dinero;
-
-    @Column(name = "coordenadaX", nullable = false)
-    private Double coordenadaX;
-
-    @Column(name = "coordenadaY", nullable = false)
-    private Double coordenadaY;
-
-    @Column(name = "coordenadaZ", nullable = false)
-    private Double coordenadaZ;
-
-    @Column(name = "velocidad", nullable = false)
-    private Double velocidad;
-
-    public Double getCapacidadMax() {
-        return capacidadMax;
-    }
-
-    public void setCapacidadMax(Double capacidadMax) {
-        this.capacidadMax = capacidadMax;
-    }
 
     @Column(name = "capacidadMax", nullable = false)
     private Double capacidadMax;
 
+    @Column(name = "velocidad", nullable = false)
+    private Double velocidad;
+
     @OneToMany(mappedBy = "nave")
-    private List<Jugador> jugadores = new ArrayList<>();
+    private List<Tripulacion> tripulacion = new ArrayList<>();
 
     @OneToMany(mappedBy = "nave")
     private List<InventarioNave> inventario = new ArrayList<>();
 
-    @ManyToOne
-    private TipoNave tipo;
-
-    @ManyToOne
-    private Planeta planeta;
-
-    public Double getDinero() {
-        return dinero;
+    // Constructor completo
+    public Nave(String foto, String nombre, Double capacidadMax, Double velocidad) {
+        this.foto = foto;
+        this.nombre = nombre;
+        this.capacidadMax = capacidadMax;
+        this.velocidad = velocidad;
+        this.tripulacion = new ArrayList<>();
+        this.inventario = new ArrayList<>();
     }
 
-    public void setDinero(Double dinero) {
-        this.dinero = dinero;
+    // Constructor vacío
+    public Nave() {
     }
 
-    public Double getCoordenadaX() {
-        return coordenadaX;
+    // Getters and Setters
+    public Long getId() {
+        return id;
     }
 
-    public void setCoordenadaX(Double coordenadaX) {
-        this.coordenadaX = coordenadaX;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Double getCoordenadaY() {
-        return coordenadaY;
+    public String getFoto() {
+        return foto;
     }
 
-    public void setCoordenadaY(Double coordenadaY) {
-        this.coordenadaY = coordenadaY;
-    }
-
-    public Double getCoordenadaZ() {
-        return coordenadaZ;
-    }
-
-    public void setCoordenadaZ(Double coordenadaZ) {
-        this.coordenadaZ = coordenadaZ;
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public String getNombre() {
@@ -94,6 +75,14 @@ public class Nave {
         this.nombre = nombre;
     }
 
+    public Double getCapacidadMax() {
+        return capacidadMax;
+    }
+
+    public void setCapacidadMax(Double capacidadMax) {
+        this.capacidadMax = capacidadMax;
+    }
+
     public Double getVelocidad() {
         return velocidad;
     }
@@ -102,36 +91,12 @@ public class Nave {
         this.velocidad = velocidad;
     }
 
-    public List<Jugador> getJugadores() {
-        return jugadores;
+    public List<Tripulacion> getTripulacion() {
+        return tripulacion;
     }
 
-    public void setJugadores(List<Jugador> jugadores) {
-        this.jugadores = jugadores;
-    }
-
-    public void addJugador(Jugador j) {
-        this.jugadores.add(j);
-    }
-
-    public void addInventario(InventarioNave iNave) {
-        this.inventario.add(iNave);
-    }
-
-    public TipoNave getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoNave tipo) {
-        this.tipo = tipo;
-    }
-
-    public Planeta getPlaneta() {
-        return planeta;
-    }
-
-    public void setPlaneta(Planeta planeta) {
-        this.planeta = planeta;
+    public void setTripulacion(List<Tripulacion> tripulacion) {
+        this.tripulacion = tripulacion;
     }
 
     public List<InventarioNave> getInventario() {
@@ -142,17 +107,11 @@ public class Nave {
         this.inventario = inventario;
     }
 
-    public Nave() {
+    public void addTripulacion(Tripulacion t) {
+        this.tripulacion.add(t);
     }
 
-    public Nave(Double dinero, Double coordenadaX, Double coordenadaY, Double coordenadaZ, String nombre,
-            Double velocidad, Double capacidadMax) {
-        this.dinero = dinero;
-        this.coordenadaX = coordenadaX;
-        this.coordenadaY = coordenadaY;
-        this.coordenadaZ = coordenadaZ;
-        this.nombre = nombre;
-        this.velocidad = velocidad;
-        this.capacidadMax = capacidadMax;
+    public void addInventario(InventarioNave iNave) {
+        this.inventario.add(iNave);
     }
 }

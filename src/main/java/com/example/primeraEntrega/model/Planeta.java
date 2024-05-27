@@ -24,19 +24,33 @@ public class Planeta {
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
+    @Column(name = "imagen", nullable = false)
+    private String imagen;
+    
     @OneToMany(mappedBy = "planeta")
     @JsonIgnore
     private List<Nave> naves = new ArrayList<>();
 
     @OneToMany(mappedBy = "planeta")
     @JsonIgnore
-    private List<InventarioPlaneta> inventario = new ArrayList<>();
+    private List<StockPlaneta> inventario = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "estrella_id")
     @JsonIgnore
     private Estrella estrella;
 
+    // Constructor completo
+    public Planeta(String nombre, String imagen, Estrella estrella) {
+        this.nombre = nombre;
+        this.imagen = imagen;
+        this.estrella = estrella;
+        this.naves = new ArrayList<>();
+        this.inventario = new ArrayList<>();
+    }
+
+    // Getters and Setters y otros métodos...
+    
     public Long getId() {
         return id;
     }
@@ -53,6 +67,14 @@ public class Planeta {
         this.nombre = nombre;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
     public List<Nave> getNaves() {
         return naves;
     }
@@ -61,11 +83,11 @@ public class Planeta {
         this.naves = naves;
     }
 
-    public List<InventarioPlaneta> getInventario() {
+    public List<StockPlaneta> getInventario() {
         return inventario;
     }
 
-    public void setInventario(List<InventarioPlaneta> inventario) {
+    public void setInventario(List<StockPlaneta> inventario) {
         this.inventario = inventario;
     }
 
@@ -77,16 +99,11 @@ public class Planeta {
         this.estrella = estrella;
     }
 
-    public void addInventario(InventarioPlaneta iPlaneta) {
+    public void addInventario(StockPlaneta iPlaneta) {
         this.inventario.add(iPlaneta);
-    }
-
-    public Planeta(String nombre) {
-        this.nombre = nombre;
     }
 
     public Planeta() {
 
     }
-
 }

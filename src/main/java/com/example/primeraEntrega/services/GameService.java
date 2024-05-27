@@ -15,7 +15,7 @@ public class GameService {
     private GameRepository gameRepository;
 
     public void updateGameTime(Double time, Game game) {
-        game.settime(time);
+        game.setTime(time);
         gameRepository.save(game);
     }
 
@@ -27,7 +27,7 @@ public class GameService {
     }
 
     public void updateScore(Double score, Game game) {
-        game.setscore(score);
+        game.setScore(score);
         gameRepository.save(game);
     }
 

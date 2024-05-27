@@ -1,11 +1,6 @@
 package com.example.primeraEntrega.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 @Entity
 public class InventarioNave {
@@ -14,40 +9,35 @@ public class InventarioNave {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "cantidad", nullable = false)
-    private Double cantidad;
-
-    @Column(name = "fOfertaDemanda", nullable = false)
-    private Double fOfertaDemanda = 0.0;
-
-    public Double getfOfertaDemanda() {
-        return fOfertaDemanda;
-    }
-
-    public void setfOfertaDemanda(Double fOfertaDemanda) {
-        this.fOfertaDemanda = fOfertaDemanda;
-    }
-
     @ManyToOne
+    @JoinColumn(name = "nave_id", nullable = false)
     private Nave nave;
 
     @ManyToOne
+    @JoinColumn(name = "producto_id", nullable = false)
     private Producto producto;
 
+    @Column(nullable = false)
+    private Integer stock;
+
+    // Constructor completo
+    public InventarioNave(Nave nave, Producto producto, Integer stock) {
+        this.nave = nave;
+        this.producto = producto;
+        this.stock = stock;
+    }
+
+    // Constructor vacío
+    public InventarioNave() {
+    }
+
+    // Getters and Setters
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Double getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Double cantidad) {
-        this.cantidad = cantidad;
     }
 
     public Nave getNave() {
@@ -66,17 +56,11 @@ public class InventarioNave {
         this.producto = producto;
     }
 
-    public InventarioNave(Double cantidad) {
-        this.cantidad = cantidad;
+    public Integer getStock() {
+        return stock;
     }
 
-    public InventarioNave() {
-
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
-
-    public InventarioNave(Double cantidad, Double fOfertaDemanda) {
-        this.cantidad = cantidad;
-        this.fOfertaDemanda = fOfertaDemanda;
-    }
-
 }

@@ -19,6 +19,9 @@ public class Estrella {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "nombreEstrella", nullable = false)
+    private String nombreEstrella;
+
     @Column(name = "coordX", nullable = false)
     private Double coordX;
 
@@ -28,10 +31,28 @@ public class Estrella {
     @Column(name = "coordZ", nullable = false)
     private Double coordZ;
 
+    @Column(name = "imagen", nullable = false)
+    private String imagen;
+
     @OneToMany(mappedBy = "estrella")
     @JsonIgnore
     private List<Planeta> planetas = new ArrayList<>();
 
+    @OneToMany(mappedBy = "estrellaInicioId")
+    @JsonIgnore
+    private List<AgujeroDeGusano> agujerosDeGusano = new ArrayList<>();
+
+    public Estrella(String nombreEstrella, Double coordX, Double coordY, Double coordZ, String imagen) {
+        this.nombreEstrella = nombreEstrella;
+        this.coordX = coordX;
+        this.coordY = coordY;
+        this.coordZ = coordZ;
+        this.imagen = imagen;
+    }
+    public String getNombreEstrella()
+    {
+        return this.nombreEstrella;
+    }
     public Long getId() {
         return id;
     }
@@ -71,16 +92,21 @@ public class Estrella {
     public void setPlanetas(List<Planeta> planetas) {
         this.planetas = planetas;
     }
-
     public void addPlaneta(Planeta p) {
         this.planetas.add(p);
     }
 
-    public Estrella(Double coordenadaX, Double coordenadaY, Double coordenadaZ) {
-        this.coordX = coordenadaX;
-        this.coordY = coordenadaY;
-        this.coordZ = coordenadaZ;
+    public void addTunel(AgujeroDeGusano t) {
+        this.agujerosDeGusano.add(t);
     }
+    public List<AgujeroDeGusano> getTuneles() {
+        return agujerosDeGusano;
+    }
+
+    public void setTuneles(List<AgujeroDeGusano> t) {
+        this.agujerosDeGusano = t;
+    }
+
 
     public Estrella() {
 
