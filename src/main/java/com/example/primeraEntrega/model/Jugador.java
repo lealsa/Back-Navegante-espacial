@@ -1,10 +1,8 @@
 package com.example.primeraEntrega.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Jugador {
@@ -13,12 +11,14 @@ public class Jugador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Column(name = "usuario", nullable = false)
     private String usuario;
 
     @Column(name = "contrasena", nullable = false)
     private String contrasena;
+
+    @ManyToMany(mappedBy = "jugadores")
+    private Set<Tripulacion> tripulaciones = new HashSet<>();
 
     public String getUsuario() {
         return usuario;
@@ -36,13 +36,12 @@ public class Jugador {
         this.contrasena = contrasena;
     }
 
-    public Jugador(String rol, String usuario, String contrasena) {
+    public Jugador(String usuario, String contrasena) {
         this.usuario = usuario;
         this.contrasena = contrasena;
     }
 
     public Jugador() {
-
     }
 
     public Long getId() {
@@ -51,5 +50,13 @@ public class Jugador {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<Tripulacion> getTripulaciones() {
+        return tripulaciones;
+    }
+
+    public void setTripulaciones(Set<Tripulacion> tripulaciones) {
+        this.tripulaciones = tripulaciones;
     }
 }

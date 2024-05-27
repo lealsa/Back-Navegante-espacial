@@ -11,7 +11,12 @@ public class Tripulacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "tripulacion")
+    @ManyToMany
+    @JoinTable(
+        name = "tripulacion_jugador",
+        joinColumns = @JoinColumn(name = "tripulacion_id"),
+        inverseJoinColumns = @JoinColumn(name = "jugador_id")
+    )
     private Set<Jugador> jugadores = new HashSet<>();
 
     @ManyToOne

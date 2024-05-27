@@ -38,7 +38,7 @@ public class Estrella {
     @JsonIgnore
     private List<Planeta> planetas = new ArrayList<>();
 
-    @OneToMany(mappedBy = "estrellaInicioId")
+    @OneToMany(mappedBy = "estrellaInicio")
     @JsonIgnore
     private List<AgujeroDeGusano> agujerosDeGusano = new ArrayList<>();
 
@@ -49,20 +49,23 @@ public class Estrella {
         this.coordZ = coordZ;
         this.imagen = imagen;
     }
-    public String getNombreEstrella()
-    {
+
+    public String getNombreEstrella() {
         return this.nombreEstrella;
     }
-    public void setNombreEstrella(String n){
+
+    public void setNombreEstrella(String n) {
         this.nombreEstrella = n;
     }
-    public String getImagen()
-    {
+
+    public String getImagen() {
         return this.imagen;
     }
-    public void setImagen(String n){
+
+    public void setImagen(String n) {
         this.imagen = n;
     }
+
     public Long getId() {
         return id;
     }
@@ -102,6 +105,7 @@ public class Estrella {
     public void setPlanetas(List<Planeta> planetas) {
         this.planetas = planetas;
     }
+
     public void addPlaneta(Planeta p) {
         this.planetas.add(p);
     }
@@ -109,6 +113,7 @@ public class Estrella {
     public void addTunel(AgujeroDeGusano t) {
         this.agujerosDeGusano.add(t);
     }
+
     public List<AgujeroDeGusano> getTuneles() {
         return agujerosDeGusano;
     }
@@ -116,7 +121,6 @@ public class Estrella {
     public void setTuneles(List<AgujeroDeGusano> t) {
         this.agujerosDeGusano = t;
     }
-
 
     public Estrella() {
 

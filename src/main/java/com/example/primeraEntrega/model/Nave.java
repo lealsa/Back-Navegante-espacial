@@ -32,24 +32,26 @@ public class Nave {
 
     @ManyToOne
     @JoinColumn(name = "current_star_id")
-    private Estrella currentStar; // Relación con la entidad Estrella
+    private Estrella currentStar;
+
+    @ManyToOne
+    @JoinColumn(name = "planeta_id")
+    private Planeta planeta;
 
     // Constructor completo
-    public Nave(String foto, String nombre, Double capacidadMax, Double velocidad, Estrella currentStar) {
+    public Nave(String foto, String nombre, Double capacidadMax, Double velocidad, Estrella currentStar, Planeta planeta) {
         this.foto = foto;
         this.nombre = nombre;
         this.capacidadMax = capacidadMax;
         this.velocidad = velocidad;
         this.currentStar = currentStar;
-        this.tripulacion = new ArrayList<>();
-        this.inventario = new ArrayList<>();
+        this.planeta = planeta;
     }
 
     // Constructor vacío
-    public Nave() {
-    }
+    public Nave() {}
 
-    // Getters and Setters
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -106,19 +108,19 @@ public class Nave {
         this.inventario = inventario;
     }
 
-    public void addTripulacion(Tripulacion t) {
-        this.tripulacion.add(t);
-    }
-
-    public void addInventario(InventarioNave iNave) {
-        this.inventario.add(iNave);
-    }
-
     public Estrella getCurrentStar() {
         return currentStar;
     }
 
     public void setCurrentStar(Estrella currentStar) {
         this.currentStar = currentStar;
+    }
+
+    public Planeta getPlaneta() {
+        return planeta;
+    }
+
+    public void setPlaneta(Planeta planeta) {
+        this.planeta = planeta;
     }
 }
