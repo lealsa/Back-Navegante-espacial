@@ -38,6 +38,7 @@ public class Planeta {
         this.nombre = nombre;
         this.imagen = imagen;
         this.estrella = estrella;
+        estrella.addPlaneta(this);
         this.naves = new ArrayList<>();
         this.inventario = new ArrayList<>();
     }

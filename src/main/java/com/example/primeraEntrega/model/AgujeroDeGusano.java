@@ -1,5 +1,8 @@
 package com.example.primeraEntrega.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,10 +23,12 @@ public class AgujeroDeGusano {
 
     @ManyToOne
     @JoinColumn(name = "estrellaInicioId", nullable = false)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private Estrella estrellaInicio;
 
     @ManyToOne
     @JoinColumn(name = "estrellaFinId", nullable = false)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private Estrella estrellaFin;
 
     public AgujeroDeGusano() {

@@ -3,7 +3,9 @@ package com.example.primeraEntrega.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,9 +41,10 @@ public class Estrella {
     private List<Planeta> planetas = new ArrayList<>();
 
     @OneToMany(mappedBy = "estrellaInicio")
-    @JsonIgnore
+    
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private List<AgujeroDeGusano> agujerosDeGusano = new ArrayList<>();
-
+    
     public Estrella(String nombreEstrella, Double coordX, Double coordY, Double coordZ, String imagen) {
         this.nombreEstrella = nombreEstrella;
         this.coordX = coordX;

@@ -42,7 +42,6 @@ public class CrewController {
         if (tripulacion != null) {
             tripulacion.setJugadores(crewDetails.getJugadores());  // Assuming you handle the entire set of players
             tripulacion.setNave(crewDetails.getNave());
-            tripulacion.setRol(crewDetails.getRol());
             return ResponseEntity.ok(crewService.saveCrew(tripulacion));
         } else {
             return ResponseEntity.notFound().build();

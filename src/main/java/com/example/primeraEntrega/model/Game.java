@@ -34,11 +34,12 @@ public class Game {
     private Nave nave;
 
     // Constructor completo
-    public Game(Double time, Double score, Double timeMax, Double cuota, Nave nave) {
-        this.time = time;
-        this.score = score;
-        this.timeMax = timeMax;
-        this.cuota = cuota;
+    public Game(Nave nave) {
+        this.time = 0D;
+        this.score = 0D;
+        this.timeMax = 3D;
+        this.cuota = 300D;
+        this.creditos=0D;
         this.nave = nave;
     }
 

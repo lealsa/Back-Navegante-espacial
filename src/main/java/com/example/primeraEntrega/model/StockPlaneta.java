@@ -40,7 +40,7 @@ public class StockPlaneta {
     public StockPlaneta() {
     }
 
-    // Getters and Setters
+    // Getters y Setters
     public Long getId() {
         return id;
     }

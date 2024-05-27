@@ -1,14 +1,8 @@
 package com.example.primeraEntrega.model;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Producto {
@@ -26,11 +20,19 @@ public class Producto {
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @OneToMany(mappedBy = "producto")
-    private List<InventarioNave> naves = new ArrayList<>();
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StockPlaneta> stockPlanetas = new ArrayList<>();
 
-    @OneToMany(mappedBy = "producto")
-    private List<StockPlaneta> planeta = new ArrayList<>();
+    // Constructores, Getters y Setters
+
+    public Producto(Double volumen, String imagen, String nombre) {
+        this.volumen = volumen;
+        this.imagen = imagen;
+        this.nombre = nombre;
+    }
+
+    public Producto() {
+    }
 
     public Long getId() {
         return id;
@@ -60,34 +62,15 @@ public class Producto {
         return nombre;
     }
 
-    public void setNombre(String imagen) {
-        this.nombre = imagen;
-    }
-    public List<InventarioNave> getNaves() {
-        return naves;
-    }
-
-    public void setNaves(List<InventarioNave> naves) {
-        this.naves = naves;
-    }
-
-    public List<StockPlaneta> getPlaneta() {
-        return planeta;
-    }
-
-    public void setPlaneta(List<StockPlaneta> planeta) {
-        this.planeta = planeta;
-    }
-
-    public Producto(Double volumen, String imagen, String nombre) {
-        this.volumen = volumen;
-        this.imagen = imagen;
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public Producto() {
-
+    public List<StockPlaneta> getStockPlanetas() {
+        return stockPlanetas;
     }
 
-
+    public void setStockPlanetas(List<StockPlaneta> stockPlanetas) {
+        this.stockPlanetas = stockPlanetas;
+    }
 }

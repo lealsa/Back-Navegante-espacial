@@ -23,13 +23,9 @@ public class Tripulacion {
     @JoinColumn(name = "nave_id", nullable = false)
     private Nave nave;
 
-    @Column(nullable = false)
-    private String rol;
-
     // Constructor completo
-    public Tripulacion(Nave nave, String rol) {
+    public Tripulacion(Nave nave) {
         this.nave = nave;
-        this.rol = rol;
     }
 
     // Constructor vacío
@@ -59,13 +55,5 @@ public class Tripulacion {
 
     public void setNave(Nave nave) {
         this.nave = nave;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
     }
 }
