@@ -14,9 +14,13 @@ public class AuthController {
     private PlayerService playerService;
 
     @PostMapping("/register")
-    public ResponseEntity<Jugador> registerPlayer(@RequestBody Jugador jugador) {
-        return ResponseEntity.ok(playerService.savePlayer(jugador));
+public ResponseEntity<?> registerPlayer(@RequestBody Jugador jugador) {
+    if (jugador.getUsuario() == null || jugador.getContrasena() == null) {
+        return ResponseEntity.badRequest().body("Usuario and Contrasena must not be null");
     }
+    return ResponseEntity.ok(playerService.savePlayer(jugador));
+}
+
 
     @PostMapping("/login")
     public ResponseEntity<Jugador> loginPlayer(@RequestBody Jugador loginDetails) {

@@ -37,8 +37,8 @@ public class CrewService {
     public boolean joinCrew(Long crewId, Long playerId) {
         Tripulacion crew = crewRepository.findById(crewId).orElse(null);
         Jugador player = playerRepository.findById(playerId).orElse(null);
-        if (crew != null && player != null && !crew.getJugadores().contains(player)) {
-            crew.getJugadores().add(player);
+        if (crew != null && player != null && !crew.getJugadorIds().contains(player.getId())) {
+            crew.getJugadorIds().add(player.getId());
             crewRepository.save(crew);
             return true;
         }

@@ -40,13 +40,14 @@ public class CrewController {
     public ResponseEntity<?> updateCrew(@PathVariable Long id, @RequestBody Tripulacion crewDetails) {
         Tripulacion tripulacion = crewService.findCrewById(id);
         if (tripulacion != null) {
-            tripulacion.setJugadores(crewDetails.getJugadores());  // Assuming you handle the entire set of players
+            tripulacion.setJugadorIds(crewDetails.getJugadorIds()); // Actualiza con los IDs de los jugadores
             tripulacion.setNave(crewDetails.getNave());
             return ResponseEntity.ok(crewService.saveCrew(tripulacion));
         } else {
             return ResponseEntity.notFound().build();
         }
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCrew(@PathVariable Long id) {

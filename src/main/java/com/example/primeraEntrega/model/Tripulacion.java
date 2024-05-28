@@ -11,19 +11,16 @@ public class Tripulacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany
-    @JoinTable(
-        name = "tripulacion_jugador",
-        joinColumns = @JoinColumn(name = "tripulacion_id"),
-        inverseJoinColumns = @JoinColumn(name = "jugador_id")
-    )
-    private Set<Jugador> jugadores = new HashSet<>();
+    @ElementCollection
+    @CollectionTable(name = "tripulacion_jugador", joinColumns = @JoinColumn(name = "tripulacion_id"))
+    @Column(name = "jugador_id")
+    private Set<Long> jugadorIds = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "nave_id", nullable = false)
     private Nave nave;
 
-    // Constructor completo
+    // Constructor con nave
     public Tripulacion(Nave nave) {
         this.nave = nave;
     }
@@ -41,12 +38,12 @@ public class Tripulacion {
         this.id = id;
     }
 
-    public Set<Jugador> getJugadores() {
-        return jugadores;
+    public Set<Long> getJugadorIds() {
+        return jugadorIds;
     }
 
-    public void setJugadores(Set<Jugador> jugadores) {
-        this.jugadores = jugadores;
+    public void setJugadorIds(Set<Long> jugadorIds) {
+        this.jugadorIds = jugadorIds;
     }
 
     public Nave getNave() {

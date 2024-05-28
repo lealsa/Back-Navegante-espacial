@@ -173,9 +173,7 @@ return;  // Salir si no hay estrellas con planetas
                 Tripulacion tripulacion = new Tripulacion(nave);
                 tripulaciones.add(tripulacion);
             }
-    
-            jugador.getTripulaciones().add(tripulaciones.get(i / 10));
-            tripulaciones.get(i / 10).getJugadores().add(jugador);
+            tripulaciones.get(i / 10).getJugadorIds().add(jugador.getId());
         }
     
         jugadorRepository.saveAll(jugadores);

@@ -1,8 +1,6 @@
 package com.example.primeraEntrega.model;
 
 import jakarta.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class Jugador {
@@ -17,25 +15,26 @@ public class Jugador {
     @Column(name = "contrasena", nullable = false)
     private String contrasena;
 
-    @ManyToMany(mappedBy = "jugadores")
-    private Set<Tripulacion> tripulaciones = new HashSet<>();
-
     @Column(name = "rol", nullable = false)
-    private String rol;  // Nuevo atributo para el rol
+    private String rol;
+
+    // Constructor, Getters y Setters...
+
+    public Jugador() {
+    }
 
     public Jugador(String usuario, String contrasena, String rol) {
         this.usuario = usuario;
         this.contrasena = contrasena;
-        this.rol = rol;  // Inicializa el rol
-    }
-
-    // Getters y Setters para 'rol'...
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsuario() {
@@ -54,27 +53,11 @@ public class Jugador {
         this.contrasena = contrasena;
     }
 
-    public Jugador(String usuario, String contrasena) {
-        this.usuario = usuario;
-        this.contrasena = contrasena;
+    public String getRol() {
+        return rol;
     }
 
-    public Jugador() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Set<Tripulacion> getTripulaciones() {
-        return tripulaciones;
-    }
-
-    public void setTripulaciones(Set<Tripulacion> tripulaciones) {
-        this.tripulaciones = tripulaciones;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

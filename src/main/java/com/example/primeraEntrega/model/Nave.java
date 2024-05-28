@@ -1,8 +1,5 @@
 package com.example.primeraEntrega.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -24,11 +21,9 @@ public class Nave {
     @Column(name = "velocidad", nullable = false)
     private Double velocidad;
 
-    @OneToMany(mappedBy = "nave")
-    private List<Tripulacion> tripulacion = new ArrayList<>();
-
-    @OneToMany(mappedBy = "nave")
-    private List<InventarioNave> inventario = new ArrayList<>();
+    // Almacena solo el ID de la tripulación asociada a esta nave
+    @Column(name = "tripulacion_id")
+    private Long tripulacionId;
 
     @ManyToOne
     @JoinColumn(name = "current_star_id")
@@ -92,20 +87,12 @@ public class Nave {
         this.velocidad = velocidad;
     }
 
-    public List<Tripulacion> getTripulacion() {
-        return tripulacion;
+    public Long getTripulacionId() {
+        return tripulacionId;
     }
 
-    public void setTripulacion(List<Tripulacion> tripulacion) {
-        this.tripulacion = tripulacion;
-    }
-
-    public List<InventarioNave> getInventario() {
-        return inventario;
-    }
-
-    public void setInventario(List<InventarioNave> inventario) {
-        this.inventario = inventario;
+    public void setTripulacionId(Long tripulacionId) {
+        this.tripulacionId = tripulacionId;
     }
 
     public Estrella getCurrentStar() {
