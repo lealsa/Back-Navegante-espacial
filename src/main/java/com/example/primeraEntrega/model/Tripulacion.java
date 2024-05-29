@@ -11,10 +11,11 @@ public class Tripulacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "tripulacion_jugador", joinColumns = @JoinColumn(name = "tripulacion_id"))
     @Column(name = "jugador_id")
     private Set<Long> jugadorIds = new HashSet<>();
+
 
     @ManyToOne
     @JoinColumn(name = "nave_id", nullable = false)

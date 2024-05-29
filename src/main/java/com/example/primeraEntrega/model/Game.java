@@ -1,7 +1,6 @@
 package com.example.primeraEntrega.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,27 +26,33 @@ public class Game {
 
     @Column(name = "cuota", nullable = false)
     private Double cuota;
+
     @Column(name = "creditos", nullable = false)
     private Double creditos;
+
     @OneToOne
     @JsonIgnore
     private Nave nave;
 
+    @Column(name = "tripulacion_id", nullable = false)
+    private Long tripulacionId;
+
     // Constructor completo
-    public Game(Nave nave) {
+    public Game(Nave nave, Long tripulacionId) {
         this.time = 0D;
         this.score = 0D;
         this.timeMax = 3D;
         this.cuota = 300D;
-        this.creditos=0D;
+        this.creditos = 0D;
         this.nave = nave;
+        this.tripulacionId = tripulacionId;
     }
 
     // Constructor vacío
     public Game() {
     }
 
-    // Getters and Setters
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -55,13 +60,15 @@ public class Game {
     public void setId(Long id) {
         this.id = id;
     }
+
     public Double getCreditos() {
         return creditos;
     }
 
-    public void setCreditos(Double id) {
-        this.creditos= id;
+    public void setCreditos(Double creditos) {
+        this.creditos = creditos;
     }
+
     public Double getTime() {
         return time;
     }
@@ -100,5 +107,13 @@ public class Game {
 
     public void setNave(Nave nave) {
         this.nave = nave;
+    }
+
+    public Long getTripulacionId() {
+        return tripulacionId;
+    }
+
+    public void setTripulacionId(Long tripulacionId) {
+        this.tripulacionId = tripulacionId;
     }
 }

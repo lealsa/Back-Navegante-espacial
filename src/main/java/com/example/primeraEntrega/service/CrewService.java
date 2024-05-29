@@ -4,7 +4,9 @@ import com.example.primeraEntrega.model.Jugador;
 import com.example.primeraEntrega.model.Tripulacion;
 import com.example.primeraEntrega.repository.CrewRepository;
 import com.example.primeraEntrega.repository.PlayerRepository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +15,22 @@ import java.util.List;
 @Service
 public class CrewService {
 
-    @Autowired
-    private CrewRepository crewRepository;
+    
     @Autowired
     private PlayerRepository playerRepository;
+    @Autowired
+    private CrewRepository crewRepository;
 
+    public CrewService(CrewRepository crewRepository) {
+        this.crewRepository = crewRepository;
+    }
+
+    @Transactional(readOnly = true)
+    public Tripulacion findTripulacionById(Long id) {
+        Optional<Tripulacion> tripulacion = crewRepository.findById(id);
+        tripulacion.ifPresent(t -> t.getJugadorIds().size()); // Initialize the collection
+        return tripulacion.orElse(null);
+    }
     public List<Tripulacion> findAllCrews() {
         return crewRepository.findAll();
     }

@@ -10,7 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import com.example.primeraEntrega.model.*;
 import com.example.primeraEntrega.repository.*;
-
+import org.springframework.transaction.annotation.Transactional;
 @Component
 public class DBInitializer implements CommandLineRunner {
 
@@ -155,8 +155,8 @@ return;  // Salir si no hay estrellas con planetas
             String contrasena = "Password_" + i;
             String rol = roles[i % 3];
             Jugador jugador = new Jugador(usuario, contrasena, rol);
-            jugadores.add(jugador);
-    
+            jugadores.add(jugador);    
+            jugadorRepository.saveAll(jugadores);
             if (i % 10 == 0) {  // Cada 10 jugadores, una nueva tripulación y nave
                 String nombreNave = "Nave_Awesome_" + (i / 10);
                 String fotoNave = SHIP_IMAGES[(i / 10) % SHIP_IMAGES.length];
@@ -169,10 +169,12 @@ return;  // Salir si no hay estrellas con planetas
     
                 Nave nave = new Nave(fotoNave, nombreNave, capacidadMax, velocidad, estrella, planeta);
                 naves.add(nave);
-    
+                naveRepository.saveAll(naves);
                 Tripulacion tripulacion = new Tripulacion(nave);
                 tripulaciones.add(tripulacion);
+                tripulacionRepository.saveAll(tripulaciones);
             }
+            System.out.println(jugador.getId());
             tripulaciones.get(i / 10).getJugadorIds().add(jugador.getId());
         }
     
@@ -192,12 +194,15 @@ return;  // Salir si no hay estrellas con planetas
         productoRepository.saveAll(productos);
     }
     
+    @Transactional
     private void createGames() {
         List<Game> games = new ArrayList<>();
         for (Tripulacion tripulacion : tripulacionRepository.findAll()) {
-            Game game = new Game(tripulacion.getNave());
+            tripulacion.getJugadorIds().size(); // Forzar la inicialización
+            Game game = new Game(tripulacion.getNave(), tripulacion.getId());
             games.add(game);
         }
         gameRepository.saveAll(games);
     }
+    
 }
